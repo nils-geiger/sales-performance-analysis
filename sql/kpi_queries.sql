@@ -1,4 +1,4 @@
-```sql
+sql
 SELECT
     ROUND(SUM(revenue), 2) AS total_revenue,
     ROUND(SUM(profit), 2) AS total_profit,
@@ -9,4 +9,4 @@ SELECT
     COUNT(DISTINCT product_id) AS products,
     COUNT(DISTINCT product_category) AS product_categories
 FROM analytics.v_sales_analysis;
-```
+
