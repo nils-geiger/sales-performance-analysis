@@ -1,99 +1,41 @@
 # Sales Performance Analysis
 
-Business Intelligence project analysing retail sales performance using **SQL, PostgreSQL, Power BI, DAX and Excel**.
+829,262 retail sales transactions
+
+638 trading days · 50 stores · 35 products · 5 product categories
+
+PostgreSQL · SQL · Power BI · DAX
+
+![Sales Performance Dashboard](images/dashboard.png)
 
 ---
 
-## Project Overview
+## Validated Findings
 
-This project demonstrates an end-to-end Business Intelligence workflow using the **Maven Toys** retail dataset.
-
-The objective is to transform raw transactional data into meaningful business insights through data preparation, SQL analysis and interactive dashboard development.
-
----
-
-## Business Objective
-
-The management team wants to better understand sales performance across stores, products and time in order to support data-driven business decisions.
-
-Key objectives include:
-
-* analysing revenue trends
-* identifying top-performing products
-* comparing store performance
-* monitoring inventory levels
-* creating an interactive management dashboard
+- Revenue increased over the observed period.
+- Profit increased more slowly than revenue.
+- Profit Margin fluctuated over time.
+- Revenue was concentrated in a small number of products.
+- Revenue varied considerably across stores.
+- Profit differed across product categories.
 
 ---
 
-## Dataset
+## Data Preparation
 
-Source: **Maven Analytics – Maven Toys**
+Sales, product, store and calendar data were integrated in PostgreSQL.
 
-Tables:
+Revenue, cost, profit and profit margin were calculated in SQL.
 
-* Sales
-* Products
-* Stores
-* Inventory
-* Calendar
+A SQL view supplied the Power BI data model.
 
 ---
 
-## Technologies
+## Analytical Scope
 
-* PostgreSQL
-* SQL
-* Microsoft Excel
-* Power BI
-* DAX
+The analysis evaluated sales performance across four business dimensions:
 
----
-
-## Repository Structure
-
-```text
-data/
-docs/
-excel/
-images/
-powerbi/
-sql/
-```
-
----
-
-## Planned Analysis
-
-The project includes analyses such as:
-
-* Revenue Analysis
-* Product Performance
-* Store Performance
-* Inventory Analysis
-* Monthly Sales Trends
-* Category Analysis
-* KPI Reporting
-
----
-
-## Dashboard
-
-The final Power BI dashboard will include:
-
-* KPI Cards
-* Revenue Trends
-* Product Analysis
-* Store Comparison
-* Category Performance
-* Interactive Filters
-
----
-
-## Repository Status
-
-Project currently under development.
-
-The repository will be updated continuously throughout the implementation.
-
----
+- Time
+- Products
+- Stores
+- Product categories
