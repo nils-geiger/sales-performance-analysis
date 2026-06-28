@@ -1,4 +1,4 @@
-```sql
+sql
 CREATE OR REPLACE VIEW analytics.v_sales_analysis AS
 
 SELECT
@@ -33,4 +33,4 @@ LEFT JOIN analytics.stores AS st
 
 LEFT JOIN analytics.products AS p
        ON s.product_id = p.product_id;
-```
+
