@@ -1,6 +1,6 @@
 # Raw Data
 
-This folder contains the original Maven Toys dataset used in this project.
+This folder contains the original dataset used in this project.
 
 Files:
 
