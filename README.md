@@ -6,7 +6,7 @@
 
 PostgreSQL · SQL · Power BI · DAX
 
-![Sales Performance Dashboard](images/dashboard.png)
+![Sales Performance Dashboard](images/dashboard1.png)
 
 ---
 
