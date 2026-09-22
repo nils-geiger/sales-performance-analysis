@@ -1,16 +1,16 @@
 # Sales Performance Analysis
 
-Retail sales analysis with an inventory extension for **Maven Toys**, a fictitious toy store chain in Mexico.
+Analysis of **829,262 retail sales transactions** and a point-in-time inventory snapshot for **Maven Toys**, a fictitious toy store chain in Mexico.
 
-The project evaluates growth, profitability, product concentration, store performance, seasonality, and inventory risk using **PostgreSQL, SQL, Power BI, and DAX**.
+**Period:** January 2022 – September 2023 · **Tools:** PostgreSQL · SQL · Power BI · DAX
+
+Sales metrics and inventory measures are calculated in SQL; the dashboard is built in Power BI/DAX. Year-over-year comparisons use matched January–September periods, and missing store-product records are kept separate from explicit zero stock.
 
 **Dataset:** [Maven Analytics – Mexico Toy Sales](https://mavenanalytics.io/data-playground/mexico-toy-sales) · Public Domain
 
-**Period:** January 2022 – September 2023
-
 ![Sales Performance Dashboard](images/sales_dashboard.png)
 
-## Project Snapshot
+## Summary Metrics
 
 | Metric | Value |
 |---|---:|
@@ -25,28 +25,28 @@ The project evaluates growth, profitability, product concentration, store perfor
 | Products | 35 |
 | Product categories | 5 |
 
-## Key Business Insights
+## Key Findings
 
-- **Growth came with margin pressure.** Comparing January–September on a like-for-like basis, 2023 revenue increased **30.9%** and units sold **40.8%** versus 2022, while profit increased only **16.0%**. Profit margin declined from **29.55% to 26.20%** (-3.35 percentage points).
-- **Revenue is concentrated in a small group of products.** The top five products generated **46.81% of total revenue** ($6.76M of $14.44M).
-- **Revenue leadership and profit leadership are not the same.** **Lego Bricks** generated the most revenue ($2.39M) but operated at a **12.5% margin**. **Colorbuds** generated the highest product profit ($834.9K) with a **53.4% margin**.
-- **Airport stores had the highest average revenue and profit per store.** Their averages were **$429.9K** and **$126.0K**, compared with $283.4K and $77.5K for Downtown stores. The network contains only 3 Airport stores versus 29 Downtown stores.
-- **Sales show a pronounced April 30 peak.** April 30, 2023 was the highest-revenue day in the dataset (**$66.8K**); April 30, 2022 was also among the strongest days (**$47.5K**). This coincides with Mexico's annual *Día de la Niña y el Niño* on April 30 and is treated as seasonal context rather than proof of causation.
+- **Revenue and units grew faster than profit.** Comparing January–September 2023 with the same period in 2022, revenue increased **30.9%**, units sold **40.8%**, and profit **16.0%**. Profit margin decreased from **29.55% to 26.20%** (-3.35 percentage points).
+- **The top five products accounted for 46.81% of total revenue.** This corresponds to **$6.76M** of **$14.44M**.
+- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** had the highest revenue ($2.39M) with a **12.5% margin**. **Colorbuds** had the highest profit ($834.9K) with a **53.4% margin**.
+- **Airport stores had the highest average revenue and profit per store.** Their averages were **$429.9K** and **$126.0K**, compared with $283.4K and $77.5K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
+- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 had revenue of **$47.5K** and was also among the highest-revenue days. The date coincides with Mexico's annual *Día de la Niña y el Niño*; the dataset alone does not establish causality.
 - **The inventory snapshot contains 29,742 units and 77 explicit zero-stock store-product records.** The stock has an estimated cost value of **$300.2K** and a retail value of **$410.2K**.
 
-## Business Questions
+## Analysis Questions
 
-The analysis focuses on five questions:
+The analysis addresses five questions:
 
-1. How are revenue, profit, units, and margin developing over time?
-2. Which products and categories drive revenue and profit?
-3. Which stores and location types perform best, including on a per-store basis?
-4. Are there recurring seasonal demand patterns?
-5. Where does the inventory snapshot indicate zero-stock or low-cover risk?
+1. How do revenue, profit, units sold, and profit margin change over time?
+2. Which products and categories account for the largest shares of revenue and profit?
+3. How do revenue and profit differ across stores and location types, including per-store averages?
+4. Are there notable calendar-related sales peaks?
+5. Which observed store-product records have zero stock or low estimated days of cover?
 
 ## Dataset
 
-The project uses the **Mexico Toy Sales** dataset from Maven Analytics: sales and inventory data for a fictitious toy store chain in Mexico, including product, store, daily transaction, and current inventory information.
+The **Mexico Toy Sales** dataset from Maven Analytics contains sales and current inventory data for a fictitious toy store chain in Mexico.
 
 | Table | Role | Rows |
 |---|---|---:|
@@ -55,8 +55,6 @@ The project uses the **Mexico Toy Sales** dataset from Maven Analytics: sales an
 | `stores.csv` | Store master data | 50 |
 | `products.csv` | Product, category, cost, and price data | 35 |
 | `inventory.csv` | Current stock by store and product | 1,593 |
-
-The source data covers **50 stores across 29 cities**, 35 products, and 5 product categories.
 
 ## Analytical Workflow
 
@@ -69,56 +67,55 @@ Sales + Products + Stores
     ↓
 Transaction-level analytical view
     ↓
-KPI / trend / product / store analysis
+Summary metrics / time / product / store analysis
     ↓
 Power BI + DAX
     ↓
-Sales performance dashboard
+Sales dashboard
 
-Inventory + recent sales velocity
+Inventory + final 30 days of sales
     ↓
-Inventory value / zero-stock / days-of-cover analysis
+Inventory value / zero-stock / days-of-cover calculations
 ```
 
-The analytical sales view derives **revenue, cost, and profit at transaction level**, creating a reusable base for both SQL validation and Power BI reporting.
+The transaction-level sales view calculates **revenue, cost, and profit for each sales record**. The same definitions are used for SQL validation and Power BI reporting.
 
 ## SQL Analysis
 
-The repository contains separate SQL files for the main analytical steps:
+The repository contains separate SQL files for the main calculations:
 
-- [`create_sales_analysis_view.sql`](sql/create_sales_analysis_view.sql) – joins sales, store, and product data and derives revenue, cost, and profit.
-- [`kpi_queries.sql`](sql/kpi_queries.sql) – validates the headline KPIs used in the project.
-- [`analysis_queries.sql`](sql/analysis_queries.sql) – covers monthly trends, comparable-period growth, product concentration, profitability, store performance, location performance, categories, and peak sales days.
-- [`inventory_queries.sql`](sql/inventory_queries.sql) – extends the project with inventory value, explicit zero-stock checks, completeness checks, and 30-day days-of-cover logic.
+- [`create_sales_analysis_view.sql`](sql/create_sales_analysis_view.sql) – joins sales, store, and product tables and calculates revenue, cost, and profit at transaction level.
+- [`kpi_queries.sql`](sql/kpi_queries.sql) – recalculates the summary metrics reported in the README.
+- [`analysis_queries.sql`](sql/analysis_queries.sql) – contains queries for monthly trends, matched-period growth, product concentration, product and category profitability, store and location comparisons, and peak sales days.
+- [`inventory_queries.sql`](sql/inventory_queries.sql) – calculates inventory value, explicit zero-stock records, inventory-table completeness, and 30-day days of cover.
 
 ## Dashboard
 
-The Power BI dashboard summarizes the core sales view through:
+The Power BI dashboard shows:
 
-- revenue, profit, and profit margin KPIs
-- monthly revenue and margin development
+- revenue, profit, and profit margin
+- monthly revenue and margin
 - top products by revenue
 - top stores by revenue
 - profit by product category
 
-
 ## Inventory Extension
 
-The inventory table is a **point-in-time snapshot**, so it should not be interpreted as a historical stock series. The SQL extension therefore focuses on:
+The inventory table is a **point-in-time snapshot**. The inventory queries calculate:
 
 - stock on hand
 - inventory value at cost and retail price
 - explicit zero-stock records
-- recent sales velocity
-- estimated days of cover
+- units sold over the final 30 days of the sales data
+- estimated days of cover based on that 30-day sales rate
 
-The inventory table contains **1,593 rows** versus 1,750 theoretically possible store-product combinations (50 × 35). The **157 absent combinations are not automatically classified as zero stock**.
+## Methodological Notes
 
-## Analytical Notes
-
-- The dataset ends on **September 30, 2023**. Year-over-year comparisons therefore use **January–September 2022 vs. January–September 2023**, rather than comparing a full 2022 with a partial 2023.
-- The April 30 pattern is an observed association. External context supports April 30 as Mexico's annual children's day, but the dataset alone cannot establish causality.
-- Inventory values are calculated from the current stock snapshot and product cost/retail price; they are not historical inventory valuations.
+- The dataset ends on **September 30, 2023**. Year-over-year comparisons therefore use **January–September 2022 and January–September 2023**, rather than comparing a full year with a partial year.
+- Store-location comparisons include **average revenue and profit per store** because the number of stores differs substantially between location types. The dataset contains 3 Airport stores and 29 Downtown stores.
+- The inventory table contains **1,593 observed store-product records** versus 1,750 theoretically possible combinations (50 × 35). The **157 absent combinations are treated as missing records, not as zero stock**.
+- Inventory values are calculated from the point-in-time stock quantities and product cost and retail-price fields. They are not historical inventory valuations.
+- The April 30 pattern is an observed association. External context identifies April 30 as Mexico's annual children's day, but the sales data alone cannot establish causality.
 
 ## Repository Structure
 
@@ -141,10 +138,6 @@ sales-performance-analysis/
     ├── inventory_queries.sql
     └── kpi_queries.sql
 ```
-
-## Tools
-
-**PostgreSQL · SQL · Power BI · DAX**
 
 ## Sources
 
