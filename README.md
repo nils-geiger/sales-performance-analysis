@@ -2,7 +2,7 @@
 
 **829,262 sales transactions · 50 stores · SQL · PostgreSQL · Power BI · DAX**
 
-Retail sales and inventory analysis for a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store-level comparisons, and seasonality.
+Retail sales and inventory analysis for a fictitious toy store chain in Mexico, covering revenue, profit and margin trends, product concentration, store and location comparisons, peak sales dates, and current inventory.
 
 ![Sales Performance Dashboard](images/sales_dashboard.png)
 
