@@ -101,7 +101,6 @@ The Power BI dashboard summarizes the core sales view through:
 - top stores by revenue
 - profit by product category
 
-The dashboard is intentionally compact and optimized for fast scanning; the README provides the detailed analytical interpretation.
 
 ## Inventory Extension
 
@@ -113,7 +112,7 @@ The inventory table is a **point-in-time snapshot**, so it should not be interpr
 - recent sales velocity
 - estimated days of cover
 
-A data-quality caveat is important: the inventory table contains **1,593 rows** versus 1,750 theoretically possible store-product combinations (50 × 35). The **157 absent combinations are not automatically classified as zero stock**.
+The inventory table contains **1,593 rows** versus 1,750 theoretically possible store-product combinations (50 × 35). The **157 absent combinations are not automatically classified as zero stock**.
 
 ## Analytical Notes
 
