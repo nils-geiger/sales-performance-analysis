@@ -2,7 +2,7 @@
 
 **829,262 sales transactions · 50 stores · PostgreSQL/SQL · Power BI/DAX**
 
-Analysis of revenue, profit, margin, product concentration, store-level differences, seasonality, and current inventory for **Maven Toys**, a fictitious toy store chain in Mexico.
+Sales and inventory analysis for **Maven Toys**, a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store-level differences, and seasonality.
 
 **Dataset:** [Maven Analytics – Mexico Toy Sales](https://mavenanalytics.io/data-playground/mexico-toy-sales) · Public Domain
 
@@ -10,12 +10,12 @@ Analysis of revenue, profit, margin, product concentration, store-level differen
 
 ## Key Findings
 
-- **Revenue and units grew faster than profit.** From January–September 2022 to the same period in 2023, revenue increased **30.9%**, units sold **40.8%**, and profit **16.0%**. Profit margin decreased from **29.55% to 26.20%** (-3.35 percentage points).
-- **The top five products accounted for 46.81% of total revenue**, corresponding to **$6.76M** of **$14.44M**.
-- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** generated $2.39M in revenue with a **12.5% margin**; **Colorbuds** generated the highest profit at $834.9K with a **53.4% margin**.
-- **Airport stores had the highest average revenue and profit per store.** Their averages were **$429.9K** and **$126.0K**, compared with $283.4K and $77.5K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
-- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 generated **$47.5K** and was also among the highest-revenue days.
-- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock store-product records.** The stock has an estimated cost value of **$300.2K** and a retail value of **$410.2K**.
+- **Revenue rose 30.9% and units sold 40.8%, while profit rose 16%.** Comparing January to September 2023 with the same period in 2022, profit margin fell from **29.6% to 26.2%**, a decrease of **3.4 percentage points**.
+- **The top five products accounted for 46.8% of total revenue**, corresponding to **$6.76M** of **$14.44M**.
+- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** generated $2.39M in revenue with a **12.5% margin**; **Colorbuds** generated the highest profit at **$835K** with a **53.4% margin**.
+- **Airport stores had the highest average revenue and profit per store:** **$430K** and **$126K**, compared with $283K and $78K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
+- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 generated **$47.5K**. The sales data alone does not establish the reason for this pattern.
+- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock records.** Estimated inventory value is **$300K at cost** and **$410K at retail price**.
 
 ## Summary Metrics
 
@@ -111,8 +111,8 @@ The inventory data is a **point-in-time snapshot**, not a historical stock serie
 
 ## Methodological Notes
 
-- The dataset ends on **September 30, 2023**. Year-over-year comparisons therefore use **January–September 2022 and January–September 2023**, rather than comparing a full year with a partial year.
-- Store-location comparisons include **average revenue and profit per store** because the number of stores differs substantially between location types. The dataset contains 3 Airport stores and 29 Downtown stores.
+- The dataset ends on **September 30, 2023**. Year-over-year comparisons therefore use **January to September 2022 and January to September 2023**, rather than comparing a full year with a partial year.
+- Store-location comparisons use **average revenue and profit per store** because the number of stores differs substantially between location types. The dataset contains 3 Airport stores and 29 Downtown stores.
 - The inventory table contains **1,593 observed store-product records** versus 1,750 theoretically possible combinations (50 × 35). The **157 absent combinations are treated as missing records, not as zero stock**.
 - Inventory values are calculated from the point-in-time stock quantities and product cost and retail-price fields. They are not historical inventory valuations.
 - The April 30 pattern is an observed association. External context identifies April 30 as Mexico's annual children's day, but the sales data alone cannot establish causality.
