@@ -1,21 +1,18 @@
 # Retail Sales Analysis
 
-**829,262 sales transactions · 50 stores · PostgreSQL/SQL · Power BI/DAX**
+**829,262 sales transactions · 50 stores · SQL · PostgreSQL · Power BI · DAX**
 
-Sales and inventory analysis for **Maven Toys**, a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store-level differences, and seasonality.
-
-**Dataset:** [Maven Analytics – Mexico Toy Sales](https://mavenanalytics.io/data-playground/mexico-toy-sales) · Public Domain
+Sales and inventory analysis for **Maven Toys**, a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store comparisons, seasonality, and current inventory.
 
 ![Sales Performance Dashboard](images/sales_dashboard.png)
 
 ## Key Findings
 
-- **Revenue rose 30.9% and units sold 40.8%, while profit rose 16%.** Comparing January to September 2023 with the same period in 2022, profit margin fell from **29.6% to 26.2%**, a decrease of **3.4 percentage points**.
-- **The top five products accounted for 46.8% of total revenue**, corresponding to **$6.76M** of **$14.44M**.
-- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** generated $2.39M in revenue with a **12.5% margin**; **Colorbuds** generated the highest profit at **$835K** with a **53.4% margin**.
-- **Airport stores had the highest average revenue and profit per store:** **$430K** and **$126K**, compared with $283K and $78K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
-- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 generated **$47.5K**. The sales data alone does not establish the reason for this pattern.
-- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock records.** Estimated inventory value is **$300K at cost** and **$410K at retail price**.
+- **Jan–Sep 2023 vs. Jan–Sep 2022: revenue +30.9%, units sold +40.8%, profit +16.0%, profit margin 29.6% → 26.2%.**
+- **Top five products: 46.8% of total revenue.** **Lego Bricks** led revenue at $2.39M with a 12.5% margin; **Colorbuds** led profit at $835K with a 53.4% margin.
+- **Airport stores averaged $430K revenue and $126K profit per store, compared with $283K and $78K for Downtown stores.** The dataset contains 3 Airport stores and 29 Downtown stores.
+- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock records; 157 store-product combinations are missing.** Missing combinations are not classified as zero stock. Estimated inventory value is about $300K at cost and $410K at retail price.
+- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset ($66.8K); April 30, 2022 generated $47.5K. April 30 is Mexico's annual *Día de la Niña y el Niño*; this provides context for the pattern but does not establish causality.
 
 ## Summary Metrics
 
@@ -32,19 +29,9 @@ Sales and inventory analysis for **Maven Toys**, a fictitious toy store chain in
 | Products | 35 |
 | Product categories | 5 |
 
-## Analysis Questions
-
-The analysis addresses five questions:
-
-1. How do revenue, profit, units sold, and profit margin change over time?
-2. Which products and categories account for the largest shares of revenue and profit?
-3. How do revenue and profit differ across stores and location types, including per-store averages?
-4. Are there notable calendar-related sales peaks?
-5. Which observed store-product records have zero stock or low estimated days of cover?
-
 ## Dataset
 
-The **Mexico Toy Sales** dataset from Maven Analytics contains sales and current inventory data for a fictitious toy store chain in Mexico.
+The project uses the [Maven Analytics – Mexico Toy Sales](https://mavenanalytics.io/data-playground/mexico-toy-sales) dataset (Public Domain), containing sales and current inventory data for a fictitious toy store chain in Mexico.
 
 The sales data covers **January 2022 through September 2023**.
 
@@ -86,18 +73,8 @@ The repository contains separate SQL files for the main calculations:
 
 - [`create_sales_analysis_view.sql`](sql/create_sales_analysis_view.sql) – joins sales, store, and product tables and calculates revenue, cost, and profit at transaction level.
 - [`kpi_queries.sql`](sql/kpi_queries.sql) – recalculates the summary metrics reported in the README.
-- [`analysis_queries.sql`](sql/analysis_queries.sql) – contains queries for monthly trends, matched-period growth, product concentration, product and category profitability, store and location comparisons, and peak sales days.
+- [`analysis_queries.sql`](sql/analysis_queries.sql) – contains queries for monthly trends, January–September year-over-year comparisons, product concentration, product and category profitability, store and location comparisons, and peak sales days.
 - [`inventory_queries.sql`](sql/inventory_queries.sql) – calculates inventory value, explicit zero-stock records, inventory-table completeness, and 30-day days of cover.
-
-## Dashboard
-
-The Power BI dashboard shows:
-
-- revenue, profit, and profit margin
-- monthly revenue and margin
-- top products by revenue
-- top stores by revenue
-- profit by product category
 
 ## Inventory Analysis
 
