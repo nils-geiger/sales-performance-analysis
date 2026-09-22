@@ -2,7 +2,7 @@
 
 **829,262 sales transactions · 50 stores · SQL · PostgreSQL · Power BI · DAX**
 
-Sales and inventory analysis for **Maven Toys**, a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store comparisons, seasonality, and current inventory.
+Retail sales and inventory analysis for a fictitious toy store chain in Mexico, covering revenue, profit, margin, product concentration, store-level comparisons, and seasonality.
 
 ![Sales Performance Dashboard](images/sales_dashboard.png)
 
