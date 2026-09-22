@@ -1,14 +1,21 @@
-# Sales Performance Analysis
+# Retail Sales Analysis
 
-Analysis of **829,262 retail sales transactions** and a point-in-time inventory snapshot for **Maven Toys**, a fictitious toy store chain in Mexico.
+**829,262 sales transactions · 50 stores · PostgreSQL/SQL · Power BI/DAX**
 
-**Period:** January 2022 – September 2023 · **Tools:** PostgreSQL · SQL · Power BI · DAX
-
-Sales metrics and inventory measures are calculated in SQL; the dashboard is built in Power BI/DAX. Year-over-year comparisons use matched January–September periods, and missing store-product records are kept separate from explicit zero stock.
+Analysis of revenue, profit, margin, product concentration, store-level differences, seasonality, and current inventory for **Maven Toys**, a fictitious toy store chain in Mexico.
 
 **Dataset:** [Maven Analytics – Mexico Toy Sales](https://mavenanalytics.io/data-playground/mexico-toy-sales) · Public Domain
 
 ![Sales Performance Dashboard](images/sales_dashboard.png)
+
+## Key Findings
+
+- **Revenue and units grew faster than profit.** From January–September 2022 to the same period in 2023, revenue increased **30.9%**, units sold **40.8%**, and profit **16.0%**. Profit margin decreased from **29.55% to 26.20%** (-3.35 percentage points).
+- **The top five products accounted for 46.81% of total revenue**, corresponding to **$6.76M** of **$14.44M**.
+- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** generated $2.39M in revenue with a **12.5% margin**; **Colorbuds** generated the highest profit at $834.9K with a **53.4% margin**.
+- **Airport stores had the highest average revenue and profit per store.** Their averages were **$429.9K** and **$126.0K**, compared with $283.4K and $77.5K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
+- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 generated **$47.5K** and was also among the highest-revenue days.
+- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock store-product records.** The stock has an estimated cost value of **$300.2K** and a retail value of **$410.2K**.
 
 ## Summary Metrics
 
@@ -25,15 +32,6 @@ Sales metrics and inventory measures are calculated in SQL; the dashboard is bui
 | Products | 35 |
 | Product categories | 5 |
 
-## Key Findings
-
-- **Revenue and units grew faster than profit.** Comparing January–September 2023 with the same period in 2022, revenue increased **30.9%**, units sold **40.8%**, and profit **16.0%**. Profit margin decreased from **29.55% to 26.20%** (-3.35 percentage points).
-- **The top five products accounted for 46.81% of total revenue.** This corresponds to **$6.76M** of **$14.44M**.
-- **The highest-revenue product was not the highest-profit product.** **Lego Bricks** had the highest revenue ($2.39M) with a **12.5% margin**. **Colorbuds** had the highest profit ($834.9K) with a **53.4% margin**.
-- **Airport stores had the highest average revenue and profit per store.** Their averages were **$429.9K** and **$126.0K**, compared with $283.4K and $77.5K for Downtown stores. The dataset contains 3 Airport stores and 29 Downtown stores.
-- **April 30 was a high-revenue date in both years.** April 30, 2023 had the highest daily revenue in the dataset (**$66.8K**); April 30, 2022 had revenue of **$47.5K** and was also among the highest-revenue days. The date coincides with Mexico's annual *Día de la Niña y el Niño*; the dataset alone does not establish causality.
-- **The inventory snapshot contains 29,742 units and 77 explicit zero-stock store-product records.** The stock has an estimated cost value of **$300.2K** and a retail value of **$410.2K**.
-
 ## Analysis Questions
 
 The analysis addresses five questions:
@@ -48,6 +46,8 @@ The analysis addresses five questions:
 
 The **Mexico Toy Sales** dataset from Maven Analytics contains sales and current inventory data for a fictitious toy store chain in Mexico.
 
+The sales data covers **January 2022 through September 2023**.
+
 | Table | Role | Rows |
 |---|---|---:|
 | `sales.csv` | Daily sales transactions | 829,262 |
@@ -56,7 +56,7 @@ The **Mexico Toy Sales** dataset from Maven Analytics contains sales and current
 | `products.csv` | Product, category, cost, and price data | 35 |
 | `inventory.csv` | Current stock by store and product | 1,593 |
 
-## Analytical Workflow
+## Workflow
 
 ```text
 Raw CSV files
@@ -99,9 +99,9 @@ The Power BI dashboard shows:
 - top stores by revenue
 - profit by product category
 
-## Inventory Extension
+## Inventory Analysis
 
-The inventory table is a **point-in-time snapshot**. The inventory queries calculate:
+The inventory data is a **point-in-time snapshot**, not a historical stock series. The inventory queries calculate:
 
 - stock on hand
 - inventory value at cost and retail price
